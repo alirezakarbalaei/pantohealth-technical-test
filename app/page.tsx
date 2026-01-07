@@ -8,7 +8,6 @@ import dynamic from "next/dynamic";
 import { Train, MapPin, Loader2 } from "lucide-react";
 
 const MapNoSSR = dynamic(() => import("@/components/Map/Map"), { ssr: false });
-
 export default function Home() {
   const { selectedStation } = useStationsStore();
   const { refetch, isLoading, error } = useStationsQuery();
@@ -55,7 +54,7 @@ export default function Home() {
         <div className="text-center fade-in">
           <h1 className="text-2xl md:text-3xl font-bold gradient-text mb-2 flex items-center justify-center gap-2">
             <Train className="w-6 h-6 md:w-8 md:h-8" />
-            German Railway Explorer
+            German Railway
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto mb-4 text-sm md:text-base">
             Discover and navigate through major train stations across Germany
@@ -67,7 +66,7 @@ export default function Home() {
               <StationsList />
             </div>
           </div>
-          <div className="lg:w-2/3 w-full h-[500px] sm:h-[600px] md:h-[700px]">
+          <div className="lg:w-2/3 w-full h-[700px] sm:h-[700px] md:h-[700px]">
               <Card className="h-full glass-effect border-0 shadow-xl card-hover">
                 <CardHeader className="border-b border-border/20 p-4">
                   <CardTitle className="flex items-center gap-2 text-lg font-bold">

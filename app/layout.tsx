@@ -6,7 +6,6 @@ import {
   ReactQueryDevtoolsWrapper,
 } from "./providers/ClientProviders";
 import ServerProviders from "./providers/ServerProviders";
-import { ModeToggle } from "@/components/ModeToggle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,6 +27,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
+
   return (
     <html lang="en" suppressHydrationWarning >
       <body
@@ -35,7 +37,6 @@ export default function RootLayout({
       >
         <ServerProviders>
           <ClientProviders>
-            <ModeToggle />
             {children}
             <ReactQueryDevtoolsWrapper />
           </ClientProviders>
