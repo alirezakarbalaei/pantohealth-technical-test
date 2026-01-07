@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, forwardRef, useImperativeHandle, useState } from "react";
 import { createPortal } from "react-dom";
-import { designSystem } from "@/lib/design-system";
 
 interface GlassmorphismModalProps {
   children?: React.ReactNode;
