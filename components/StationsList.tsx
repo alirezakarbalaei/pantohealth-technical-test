@@ -6,7 +6,7 @@ import type { Station } from "@/types/map";
 import { useStationsStore } from "@/store/useStationsStore";
 import { useStationsQuery } from "@/queries/map/queries";
 import { Train, Search, MapPin } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ScrollArea } from "./ui/scroll-area";
 
 const StationsList = () => {
@@ -17,9 +17,12 @@ const StationsList = () => {
     filter,
     setFilter,
     setStations,
+    isMobileStationsListOpen,
+    setMobileStationsListOpen,
   } = useStationsStore();
 
   const { data } = useStationsQuery();
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -27,8 +30,30 @@ const StationsList = () => {
     }
   }, [data, setStations]);
 
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkIfMobile();
+    window.addEventListener("resize", checkIfMobile);
+    
+    return () => window.removeEventListener("resize", checkIfMobile);
+  }, []);
+
+  const handleStationSelect = (station: Station) => {
+    setSelectedStation(station);
+    if (isMobile) {
+      setMobileStationsListOpen(false);
+    }
+  };
+
+  if (isMobile && !isMobileStationsListOpen) {
+    return null;
+  }
+
   return (
-    <Card className="w-full glass-effect border-0 shadow-xl card-hover">
+    <Card className={`w-full border-0 shadow-xl card-hover transition-all duration-300 ease-in-out ${isMobile ? "fixed inset-x-0 top-0 z-40 max-w-md mx-auto mt-16 rounded-b-lg bg-card" : "glass-effect"}`}>
       <CardHeader className="border-b border-border/20">
         <CardTitle className="flex items-center gap-2 text-lg font-bold">
           <Train className="w-5 h-5 text-primary" />
@@ -46,7 +71,7 @@ const StationsList = () => {
             className="pl-9 transition-smooth focus:ring-2 focus:ring-primary/20"
           />
         </div>
-        <ScrollArea className="max-h-[500px] overflow-y-auto">
+        <ScrollArea className={`overflow-y-auto ${isMobile ? "max-h-[60vh]" : "max-h-[500px]"}`}>
           {filteredStations.length > 0 ? (
             filteredStations.map((station) => (
               <div
@@ -56,7 +81,7 @@ const StationsList = () => {
                     ? "border-primary bg-accent/100"
                     : ""
                 }`}
-                onClick={() => setSelectedStation(station)}
+                onClick={() => handleStationSelect(station)}
               >
                 <div className="flex items-center gap-3">
                   <MapPin className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-smooth" />

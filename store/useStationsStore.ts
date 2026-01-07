@@ -13,6 +13,11 @@ export interface StationsStore {
   filter: string;
   modal: ModalState;
 
+  /* --------- Mobile Stations List state --------- */
+  isMobileStationsListOpen: boolean;
+  setMobileStationsListOpen: (isOpen: boolean) => void;
+  toggleMobileStationsList: () => void;
+
   /* --------- Existing actions --------- */
   setStations: (stations: Station[]) => void;
   setFilter: (filter: string) => void;
@@ -39,6 +44,11 @@ export const useStationsStore = create<StationsStore>((set: SetState<StationsSto
     content: null,
     title: "",
   },
+
+  /* --------- Mobile Stations List state --------- */
+  isMobileStationsListOpen: false,
+  setMobileStationsListOpen: (isOpen: boolean) => set({ isMobileStationsListOpen: isOpen }),
+  toggleMobileStationsList: () => set((state) => ({ isMobileStationsListOpen: !state.isMobileStationsListOpen })),
 
   /* --------- Existing actions --------- */
   setStations: (stations: Station[]) => {

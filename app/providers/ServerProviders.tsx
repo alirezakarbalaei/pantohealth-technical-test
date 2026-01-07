@@ -10,7 +10,7 @@ export default function ServerProviders({ children }: ServerProvidersProps) {
   return (
     <ThemeProvider
       attribute="class"      // adds class="dark" or "light" on <html>
-      defaultTheme="dark"    // start in dark mode by default
+      defaultTheme="light"    // start in dark mode by default
       enableSystem={false}   // ignore OS color scheme
     >
       {children}
