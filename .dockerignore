@@ -1,0 +1,36 @@
+# Ignore files that are not needed in the Docker image
+
+.git
+.gitignore
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Node modules (will be installed in Docker)
+node_modules
+
+# Logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# IDE files
+.idea
+.vscode
+*.sublime-workspace
+*.sublime-project
+
+# Build artifacts
+.next
+out
+
+# Environment files
+.env*.local
+
+# Coverage and test results
+coverage
+.test-results
+
+# Cache and lock files (except pnpm-lock.yaml)
+*.lock
+!pnpm-lock.yaml

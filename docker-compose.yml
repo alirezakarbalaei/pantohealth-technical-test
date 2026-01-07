@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  pantohealth:
+    container_name: pantohealth-app
+    build: .
+    ports:
+      - "4005:4005"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
